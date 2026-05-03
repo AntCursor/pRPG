@@ -6,7 +6,7 @@ void setup() {
   noStroke();
 
   grid = new Grid(20, 15); 
-  grid.update((x, y) -> {
+  grid.forEach((x, y) -> {
     byte cell = (byte)(random(0, 1) >= 0.9 ? 1 : 0);
     grid.set(x, y, cell);
   });

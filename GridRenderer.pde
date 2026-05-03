@@ -13,7 +13,7 @@ class GridRenderer {
     float w = width/(float)grid.sizeX();
     float h = height/(float)grid.sizeY();
 
-    grid.update((x, y) -> {
+    grid.forEach((x, y) -> {
         fill(colorMap.mapByte(grid.get(x, y)));
         rect(x*w, y*h, w, h);
     });

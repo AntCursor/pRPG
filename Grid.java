@@ -1,5 +1,5 @@
-interface CellUpdate {
-  void update(int x, int y);
+interface CellConsumer {
+  void apply(int x, int y);
 }
 
 class Grid {
@@ -11,6 +11,7 @@ class Grid {
   int sizeX() {
     return sizeX;
   }
+
   int sizeY() {
     return sizeY;
   }
@@ -25,14 +26,15 @@ class Grid {
   byte get(int x, int y) {
     return cells[y * sizeX + x];
   }
+
   void set(int x, int y, byte c) {
     cells[y * sizeX + x] = c;
   }
 
-  void update(CellUpdate up) {
+  void forEach(CellConsumer f) {
     for (int y = 0; y < sizeY; ++y)
       for (int x = 0; x < sizeX; ++x) {
-        up.update(x, y);
-    }
+        f.apply(x, y);
+      }
   }
 }
