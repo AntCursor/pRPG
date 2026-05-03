@@ -3,15 +3,17 @@ interface ColorMap {
 }
 
 class GridRenderer {
+  private Grid grid;
   private ColorMap colorMap;
 
-  GridRenderer(ColorMap map) {
+  GridRenderer(Grid grid, ColorMap map) {
+    this.grid = grid;
     this.colorMap = map;
   }
 
-  void render(Grid grid) {
-    float w = width/(float)grid.sizeX();
-    float h = height/(float)grid.sizeY();
+  void render() {
+    float w = width/(float)grid.sizeX();  
+    float h = height/(float)grid.sizeY(); 
 
     grid.forEach((x, y) -> {
         fill(colorMap.mapByte(grid.get(x, y)));

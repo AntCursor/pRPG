@@ -11,11 +11,11 @@ void setup() {
     grid.set(x, y, cell);
   });
 
-  gridRenderer = new GridRenderer(cell -> {
+  gridRenderer = new GridRenderer(grid, cell -> {
     return cell == 0 ? color(0x00, 0xa0, 0x10) : color(0x78);
   });
 }
 
 void draw() {
-  gridRenderer.render(grid);
+  gridRenderer.render();
 }
