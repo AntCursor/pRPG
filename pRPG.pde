@@ -1,6 +1,11 @@
 Grid grid;
 GridRenderer gridRenderer;
 
+CellConsumer worldGen = (x, y) -> {
+    byte cell = (byte)(random(0, 1) >= 0.9 ? 1 : 0);
+    grid.set(x, y, cell);
+  };
+
 void setup() {
   size(800, 600);
   noStroke();
@@ -9,10 +14,7 @@ void setup() {
   PImage green = createImage(32, 32, RGB);
 
   grid = new Grid(20, 15); 
-  grid.forEach((x, y) -> {
-    byte cell = (byte)(random(0, 1) >= 0.9 ? 1 : 0);
-    grid.set(x, y, cell);
-  });
+  grid.forEach(worldGen);
 
   ImageMap im = cell -> {
     return cell == 0 ? green : nixos;
