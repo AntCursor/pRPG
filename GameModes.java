@@ -1,0 +1,3 @@
+enum GameModes {
+    MENU, EXPLORATION, BATTLE, GAMEOVER;
+}
