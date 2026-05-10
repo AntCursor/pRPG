@@ -36,25 +36,17 @@ public class Button extends UIComponent {
 
   @Override
   public void draw(Vec2 parentPos, Vec2 parentSize) {
-    Vec2 rectPos = relPos.hProd(parentSize).add(parentPos);
-    Vec2 rectSize = relSize.hProd(parentSize);
+    float rectX = relPos.x * parentSize.x + parentPos.x;
+    float rectY = relPos.y * parentSize.y + parentPos.y;
+
+    float rectW = relSize.x * parentSize.x;
+    float rectH = relSize.y * parentSize.y;
 
     renderer.setColor(color);
-    renderer.drawRect(
-        rectPos.x,
-        rectPos.y,
-        rectSize.x,
-        rectSize.y);
-
-    Vec2 textPos = relPos
-        .hProd(parentSize)
-        .add(parentPos)
-        .add(rectSize.prod(0.5f));
+    renderer.drawRect(rectX, rectY, rectW, rectH);
 
     renderer.setColor(fontColor);
-    renderer.drawText(
-        label,
-        textPos.x, textPos.y);
+    renderer.drawText(label, rectX + rectW * 0.5f, rectY + rectH * 0.5f);
   }
 
   @Override

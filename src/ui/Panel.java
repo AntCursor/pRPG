@@ -24,28 +24,36 @@ public class Panel extends UIComponent {
 
   @Override
   public void draw(Vec2 parentPos, Vec2 parentSize) {
-    for (UIComponent c : components) {
-      Vec2 cPos = relPos.hProd(parentSize).add(parentPos);
-      Vec2 cSize = relSize.hProd(parentSize);
+    float panelX = relPos.x * parentSize.x + parentPos.x;
+    float panelY = relPos.y * parentSize.y + parentPos.y;
 
+    float panelW = relSize.x * parentSize.x;
+    float panelH = relSize.y * parentSize.y;
+
+    Vec2 cPos = new Vec2(panelX, panelY);
+    Vec2 cSize = new Vec2(panelW, panelH);
+
+    for (UIComponent c : components) {
       c.draw(cPos, cSize);
     }
   }
 
   @Override
   public void handleClick(Vec2 clickPos, Vec2 parentPos, Vec2 parentSize) {
-    Vec2 panelPos = relPos.hProd(parentSize).add(parentPos);
-    Vec2 panelSize = relSize.hProd(parentSize);
+    float panelX = relPos.x * parentSize.x + parentPos.x;
+    float panelY = relPos.y * parentSize.y + parentPos.y;
+    float panelW = relSize.x * parentSize.x;
+    float panelH = relSize.y * parentSize.y;
 
     for (UIComponent c : components) {
-      Vec2 absPos = c.relPos.hProd(panelSize).add(panelPos);
-      Vec2 absSize = c.relSize.hProd(panelSize);
+      float absX = c.relPos.x * panelW + panelX;
+      float absY = c.relPos.y * panelH + panelY;
+      float absW = c.relSize.x * panelW;
+      float absH = c.relSize.y * panelH;
 
-      boolean hitX = clickPos.x > absPos.x && clickPos.x < absPos.x + absSize.x;
-      boolean hitY = clickPos.y > absPos.y && clickPos.y < absPos.y + absSize.y;
-
-      if (hitX && hitY) {
-        c.handleClick(clickPos, absPos, absSize);
+      if (clickPos.x > absX && clickPos.x < absX + absW &&
+          clickPos.y > absY && clickPos.y < absY + absH) {
+        c.handleClick(clickPos, new Vec2(absX, absY), new Vec2(absW, absH));
       }
     }
   }
