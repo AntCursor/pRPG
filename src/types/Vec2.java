@@ -1,6 +1,8 @@
 package types;
 
 public class Vec2 {
+  public static final Vec2 origin = new Vec2(0, 0);
+
   public float x = 0.f;
   public float y = 0.f;
 
