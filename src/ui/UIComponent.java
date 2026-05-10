@@ -15,6 +15,7 @@ public abstract class UIComponent {
 
   public abstract void draw(Vec2 parentPos, Vec2 parentSize);
 
-  public void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
+  public void handleClick(Vec2 clickPos, Vec2 parentPos, Vec2 parentSize) {
   }
+
 }

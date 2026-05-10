@@ -5,7 +5,8 @@ import types.Vec2;
 
 public class Button extends UIComponent {
   private String label = "";
-  private Runnable action;
+  private Runnable action = () -> {
+  };
   private int color = Color.rgb(0xff, 0xff, 0xff);
   private int fontColor = Color.rgb(0, 0, 0);
 
@@ -48,7 +49,7 @@ public class Button extends UIComponent {
     Vec2 textPos = relPos
         .hProd(parentSize)
         .add(parentPos)
-        .add(relSize.hProd(parentSize).prod(0.5f));
+        .add(rectSize.prod(0.5f));
 
     renderer.setColor(fontColor);
     renderer.drawText(
@@ -57,7 +58,7 @@ public class Button extends UIComponent {
   }
 
   @Override
-  public void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
+  public void handleClick(Vec2 clickPos, Vec2 parentPos, Vec2 parentSize) {
     action.run();
   }
 }

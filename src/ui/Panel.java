@@ -33,19 +33,19 @@ public class Panel extends UIComponent {
   }
 
   @Override
-  public void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
+  public void handleClick(Vec2 clickPos, Vec2 parentPos, Vec2 parentSize) {
+    Vec2 panelPos = relPos.hProd(parentSize).add(parentPos);
+    Vec2 panelSize = relSize.hProd(parentSize);
+
     for (UIComponent c : components) {
-      Vec2 absPos = c.relPos.hProd(surfaceSize);
-      Vec2 absSize = c.relSize.hProd(surfaceSize);
+      Vec2 absPos = c.relPos.hProd(panelSize).add(panelPos);
+      Vec2 absSize = c.relSize.hProd(panelSize);
 
-      boolean hit_x = clickPos.x > absPos.x
-          && clickPos.x < absPos.x + absSize.x;
+      boolean hitX = clickPos.x > absPos.x && clickPos.x < absPos.x + absSize.x;
+      boolean hitY = clickPos.y > absPos.y && clickPos.y < absPos.y + absSize.y;
 
-      boolean hit_y = clickPos.y > absPos.y
-          && clickPos.y < absPos.y + absSize.y;
-
-      if (hit_x && hit_y) {
-        c.handleClick(clickPos, absSize);
+      if (hitX && hitY) {
+        c.handleClick(clickPos, absPos, absSize);
       }
     }
   }
