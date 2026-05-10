@@ -1,3 +1,3 @@
-#/usr/bin/env bash
-
-processing cli --sketch=$(pwd) --output=$(pwd)/out --force --run
+#!/bin/sh
+javac -cp lib/core.jar -d bin $(find src -name "*.java")
+java -cp bin:lib/core.jar pRPG
