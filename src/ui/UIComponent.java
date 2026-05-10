@@ -8,6 +8,11 @@ public abstract class UIComponent {
   protected Vec2 relPos;
   protected Vec2 relSize;
 
+  protected UIComponent() {
+    relPos = new Vec2(0, 0);
+    relSize = new Vec2(1, 1);
+  }
+
   public UIComponent(float x, float y, float w, float h) {
     relPos = new Vec2(x, y);
     relSize = new Vec2(w, h);
