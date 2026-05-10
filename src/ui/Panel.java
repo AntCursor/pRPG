@@ -13,13 +13,8 @@ public class Panel extends UIComponent {
     super(new Vec2(), new Vec2());
   }
 
-  public Panel root() {
-    this.relPos.x = 0;
-    this.relPos.y = 0;
-    this.relSize.x = 1;
-    this.relSize.y = 1;
-
-    return this;
+  public static Panel root() {
+    return new Panel(new Vec2(0, 0), new Vec2(1, 1));
   }
 
   public Panel components(UIComponent[] comps) {
