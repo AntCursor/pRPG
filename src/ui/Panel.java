@@ -1,10 +1,12 @@
 package ui;
 
+import types.Vec2;
+
 public class Panel extends UIComponent {
   private UIComponent[] components;
 
-  Panel(float relX, float relY, float relW, float relH) {
-    super(relX, relY, relW, relH);
+  Panel(Vec2 relPos, Vec2 relSize) {
+    super(relPos, relSize);
   }
 
   Panel components(UIComponent[] comps) {
@@ -13,29 +15,29 @@ public class Panel extends UIComponent {
   }
 
   @Override
-  void draw(float pX, float pY, float pW, float pH) {
+  public void draw(Vec2 parentPos, Vec2 parentSize) {
     for (UIComponent c : components) {
-      c.draw(
-          relX * pW + pX,
-          relY * pH + pY,
-          relW * pW,
-          relH * pH);
+      Vec2 cPos = relPos.hProd(parentSize).add(parentPos);
+      Vec2 cSize = relSize.hProd(parentSize);
+
+      c.draw(cPos, cSize);
     }
   }
 
   @Override
-  void handleClick(float x, float y, float width, float height) {
+  void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
     for (UIComponent c : components) {
-      boolean hit_x = x > c.relX * width
-          && x < c.relX * width + c.relW * width;
-      boolean hit_y = y > c.relY * height
-          && y < c.relY * height + c.relH * height;
+      Vec2 absPos = c.relPos.hProd(surfaceSize);
+      Vec2 absSize = c.relSize.hProd(surfaceSize);
+
+      boolean hit_x = clickPos.x > absPos.x
+          && clickPos.x < absPos.x + absSize.x;
+
+      boolean hit_y = clickPos.y > absPos.y
+          && clickPos.y < absPos.y + absSize.y;
 
       if (hit_x && hit_y) {
-        c.handleClick(
-            x, y,
-            width * relW,
-            height * relH);
+        c.handleClick(clickPos, absSize);
       }
     }
   }

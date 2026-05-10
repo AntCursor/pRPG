@@ -1,6 +1,7 @@
 package ui;
 
 import types.Color;
+import types.Vec2;
 
 public class Button extends UIComponent {
   private String label = "";
@@ -8,8 +9,8 @@ public class Button extends UIComponent {
   private int color = Color.rgb(0xff, 0xff, 0xff);
   private int fontColor = Color.rgb(0, 0, 0);
 
-  Button(float relX, float relY, float relW, float relH) {
-    super(relX, relY, relW, relH);
+  Button(Vec2 relPos, Vec2 relSize) {
+    super(relPos, relSize);
   }
 
   Button label(String label) {
@@ -33,22 +34,30 @@ public class Button extends UIComponent {
   }
 
   @Override
-  void draw(float pX, float pY, float pW, float pH) {
+  public void draw(Vec2 parentPos, Vec2 parentSize) {
+    Vec2 rectPos = relPos.hProd(parentSize).add(parentPos);
+    Vec2 rectSize = relSize.hProd(parentSize);
+
     renderer.setColor(color);
     renderer.drawRect(
-        relX * pW + pX,
-        relY * pH + pY,
-        relW * pW, relH * pH);
+        rectPos.x,
+        rectPos.y,
+        rectSize.x,
+        rectSize.y);
+
+    Vec2 textPos = relPos
+        .hProd(parentSize)
+        .add(parentPos)
+        .add(relSize.hProd(parentSize).prod(0.5f));
 
     renderer.setColor(fontColor);
     renderer.drawText(
         label,
-        (float) (relX * pW + pX + 0.5 * relW * pW),
-        (float) (relY * pH + pY + 0.5 * relH * pH));
+        textPos.x, textPos.y);
   }
 
   @Override
-  void handleClick(float x, float y, float width, float height) {
+  void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
     action.run();
   }
 }

@@ -1,19 +1,20 @@
 package ui;
 
+import types.Vec2;
+
 abstract class UIComponent {
   static UIRenderer renderer;
 
-  protected float relX, relY, relW, relH;
+  protected Vec2 relPos;
+  protected Vec2 relSize;
 
-  UIComponent(float relX, float relY, float relW, float relH) {
-    this.relX = relX;
-    this.relY = relY;
-    this.relW = relW;
-    this.relH = relH;
+  UIComponent(Vec2 relPos, Vec2 relSize) {
+    this.relPos = relPos;
+    this.relSize = relSize;
   }
 
-  abstract void draw(float pX, float pY, float pW, float pH);
+  abstract void draw(Vec2 parentPos, Vec2 parentSize);
 
-  void handleClick(float x, float y, float width, float height) {
+  void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
   }
 }
