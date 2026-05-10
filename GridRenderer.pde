@@ -18,14 +18,14 @@ class GridRenderer {
     this.colorMap = map;
     this.imageMap = null;
 
-    this.upDimensions();
+    this.updateDimensions();
   }
   GridRenderer(Grid grid, ImageMap map) {
     this.grid = grid;
     this.imageMap = map;
     this.colorMap = null;
 
-    this.upDimensions();
+    this.updateDimensions();
   }
 
   void render() {
@@ -44,7 +44,7 @@ class GridRenderer {
     }
   }
 
-  void upDimensions() {
+  void updateDimensions() {
     w = width/(float)grid.sizeX();  
     h = height/(float)grid.sizeY(); 
   }
