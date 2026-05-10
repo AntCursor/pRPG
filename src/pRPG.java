@@ -1,10 +1,11 @@
 import processing.core.*;
+import grid.*;
 
 public class pRPG extends PApplet {
   Grid grid;
   GridRenderer gridRenderer;
 
-  CellConsumer worldGen = (x, y) -> {
+  Grid.CellConsumer worldGen = (x, y) -> {
     byte cell = (byte) (random(0, 1) >= 0.9 ? 1 : 0);
     grid.set(x, y, cell);
   };
@@ -24,7 +25,7 @@ public class pRPG extends PApplet {
     grid = new Grid(20, 15);
     grid.forEach(worldGen);
 
-    ImageMap im = cell -> {
+    GridRenderer.ImageMap im = cell -> {
       return cell == 0 ? green : nixos;
     };
 

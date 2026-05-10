@@ -1,14 +1,16 @@
+package grid;
+
 import processing.core.*;
 
-interface ColorMap {
-  int mapByte(byte c);
-}
+public class GridRenderer {
+  public interface ColorMap {
+    int mapByte(byte c);
+  }
 
-interface ImageMap {
-  PImage mapByte(byte c);
-}
+  public interface ImageMap {
+    PImage mapByte(byte c);
+  }
 
-class GridRenderer {
   private PApplet sketch;
 
   private Grid grid;
@@ -18,7 +20,7 @@ class GridRenderer {
   private float w;
   private float h;
 
-  GridRenderer(PApplet sketch, Grid grid, ColorMap map) {
+  public GridRenderer(PApplet sketch, Grid grid, ColorMap map) {
     this.sketch = sketch;
     this.grid = grid;
     this.colorMap = map;
@@ -27,7 +29,7 @@ class GridRenderer {
     this.updateDimensions();
   }
 
-  GridRenderer(PApplet sketch, Grid grid, ImageMap map) {
+  public GridRenderer(PApplet sketch, Grid grid, ImageMap map) {
     this.sketch = sketch;
     this.grid = grid;
     this.imageMap = map;
@@ -36,7 +38,7 @@ class GridRenderer {
     this.updateDimensions();
   }
 
-  void render() {
+  public void render() {
     if (imageMap != null) {
       grid.forEach((x, y) -> {
         sketch.image(

@@ -1,37 +1,39 @@
-interface CellConsumer {
-  void apply(int x, int y);
-}
+package grid;
 
-class Grid {
+public class Grid {
+  public interface CellConsumer {
+    void apply(int x, int y);
+  }
+
   private int sizeX;
   private int sizeY;
 
   private byte[] cells;
 
-  int sizeX() {
+  public int sizeX() {
     return sizeX;
   }
 
-  int sizeY() {
+  public int sizeY() {
     return sizeY;
   }
 
-  Grid(int w, int h) {
+  public Grid(int w, int h) {
     this.sizeX = w;
     this.sizeY = h;
 
     this.cells = new byte[h * w];
   }
 
-  byte get(int x, int y) {
+  public byte get(int x, int y) {
     return cells[y * sizeX + x];
   }
 
-  void set(int x, int y, byte c) {
+  public void set(int x, int y, byte c) {
     cells[y * sizeX + x] = c;
   }
 
-  void forEach(CellConsumer f) {
+  public void forEach(CellConsumer f) {
     for (int y = 0; y < sizeY; ++y)
       for (int x = 0; x < sizeX; ++x) {
         f.apply(x, y);

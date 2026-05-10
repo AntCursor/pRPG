@@ -1,4 +1,5 @@
-import ui.*;
+package ui;
+
 import processing.core.*;
 
 class ProcessingRenderer implements UIRenderer {
