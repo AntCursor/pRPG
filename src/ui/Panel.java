@@ -25,7 +25,7 @@ public class Panel extends UIComponent {
   }
 
   @Override
-  void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
+  public void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
     for (UIComponent c : components) {
       Vec2 absPos = c.relPos.hProd(surfaceSize);
       Vec2 absSize = c.relSize.hProd(surfaceSize);

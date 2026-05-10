@@ -57,7 +57,7 @@ public class Button extends UIComponent {
   }
 
   @Override
-  void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
+  public void handleClick(Vec2 clickPos, Vec2 surfaceSize) {
     action.run();
   }
 }
