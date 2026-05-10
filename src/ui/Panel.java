@@ -5,16 +5,16 @@ import types.Vec2;
 public class Panel extends UIComponent {
   private UIComponent[] components;
 
-  public Panel(Vec2 relPos, Vec2 relSize) {
-    super(relPos, relSize);
+  public Panel(float x, float y, float w, float h) {
+    super(x, y, w, h);
   }
 
   public Panel() {
-    super(new Vec2(), new Vec2());
+    super(0, 0, 0, 0);
   }
 
   public static Panel root() {
-    return new Panel(new Vec2(0, 0), new Vec2(1, 1));
+    return new Panel(0, 0, 1, 1);
   }
 
   public Panel components(UIComponent[] comps) {

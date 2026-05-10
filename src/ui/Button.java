@@ -10,8 +10,8 @@ public class Button extends UIComponent {
   private int color = Color.rgb(0xff, 0xff, 0xff);
   private int fontColor = Color.rgb(0, 0, 0);
 
-  public Button(Vec2 relPos, Vec2 relSize) {
-    super(relPos, relSize);
+  public Button(float x, float y, float w, float h) {
+    super(x, y, w, h);
   }
 
   public Button label(String label) {
