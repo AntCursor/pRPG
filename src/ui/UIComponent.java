@@ -2,7 +2,7 @@ package ui;
 
 import types.Vec2;
 
-abstract class UIComponent {
+public abstract class UIComponent {
   static UIRenderer renderer;
 
   protected Vec2 relPos;
