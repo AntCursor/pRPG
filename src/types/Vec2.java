@@ -9,7 +9,15 @@ public class Vec2 {
     this.y = y;
   }
 
-  Vec2 add(Vec2 other) {
+  public Vec2 add(Vec2 other) {
     return new Vec2(this.x + other.x, this.y + other.y);
+  }
+
+  public Vec2 hProd(Vec2 other) {
+    return new Vec2(this.x * other.x, this.y * other.y);
+  }
+
+  public Vec2 prod(float scalar) {
+    return new Vec2(this.x * scalar, this.y * scalar);
   }
 }
