@@ -1,13 +1,14 @@
-import ui.*;
+package ui;
+
 import processing.core.*;
 
-class ProcessingRenderer implements UIRenderer {
+public class PUIRenderer implements UIRenderer {
   private PApplet sketch;
 
   private int borderRadius;
   private int padding;
 
-  ProcessingRenderer(PApplet sketch, int borderRadius, int padding) {
+  public PUIRenderer(PApplet sketch, int borderRadius, int padding) {
     this.sketch = sketch;
     this.borderRadius = borderRadius;
     this.padding = padding;
