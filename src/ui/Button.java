@@ -1,10 +1,12 @@
 package ui;
 
+import types.Color;
+
 public class Button extends UIComponent {
   private String label = "";
   private Runnable action;
-  private int color = 0xffffffff;
-  private int fontColor = 0x0;
+  private int color = Color.rgb(0xff, 0xff, 0xff);
+  private int fontColor = Color.rgb(0, 0, 0);
 
   Button(float relX, float relY, float relW, float relH) {
     super(relX, relY, relW, relH);
