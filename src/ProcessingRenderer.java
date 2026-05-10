@@ -1,7 +1,7 @@
 import ui.*;
 import processing.core.*;
 
-class ProcessingRenderer implements Renderer {
+class ProcessingRenderer implements UIRenderer {
   private PApplet sketch;
 
   int borderRadius;

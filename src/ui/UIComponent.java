@@ -1,7 +1,7 @@
 package ui;
 
 abstract class UIComponent {
-  static Renderer renderer;
+  static UIRenderer renderer;
 
   protected float relX, relY, relW, relH;
 
