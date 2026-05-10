@@ -1,11 +1,16 @@
+import processing.core.*;
+
 interface ColorMap {
-  color mapByte(byte c);
+  int mapByte(byte c);
 }
+
 interface ImageMap {
   PImage mapByte(byte c);
 }
 
 class GridRenderer {
+  private PApplet sketch;
+
   private Grid grid;
   private ColorMap colorMap;
   private ImageMap imageMap;
@@ -13,14 +18,17 @@ class GridRenderer {
   private float w;
   private float h;
 
-  GridRenderer(Grid grid, ColorMap map) {
+  GridRenderer(PApplet sketch, Grid grid, ColorMap map) {
+    this.sketch = sketch;
     this.grid = grid;
     this.colorMap = map;
     this.imageMap = null;
 
     this.updateDimensions();
   }
-  GridRenderer(Grid grid, ImageMap map) {
+
+  GridRenderer(PApplet sketch, Grid grid, ImageMap map) {
+    this.sketch = sketch;
     this.grid = grid;
     this.imageMap = map;
     this.colorMap = null;
@@ -31,21 +39,20 @@ class GridRenderer {
   void render() {
     if (imageMap != null) {
       grid.forEach((x, y) -> {
-        image(
-          imageMap.mapByte(grid.get(x, y)),
-          x*w, y*h, w, h
-        );
+        sketch.image(
+            imageMap.mapByte(grid.get(x, y)),
+            x * w, y * h, w, h);
       });
     } else if (colorMap != null) {
       grid.forEach((x, y) -> {
-          fill(colorMap.mapByte(grid.get(x, y)));
-          rect(x*w, y*h, w, h);
+        sketch.fill(colorMap.mapByte(grid.get(x, y)));
+        sketch.rect(x * w, y * h, w, h);
       });
     }
   }
 
   void updateDimensions() {
-    w = width/(float)grid.sizeX();  
-    h = height/(float)grid.sizeY(); 
+    w = sketch.width / (float) grid.sizeX();
+    h = sketch.height / (float) grid.sizeY();
   }
 }
