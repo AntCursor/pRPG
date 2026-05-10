@@ -9,26 +9,26 @@ public class Button extends UIComponent {
   private int color = Color.rgb(0xff, 0xff, 0xff);
   private int fontColor = Color.rgb(0, 0, 0);
 
-  Button(Vec2 relPos, Vec2 relSize) {
+  public Button(Vec2 relPos, Vec2 relSize) {
     super(relPos, relSize);
   }
 
-  Button label(String label) {
+  public Button label(String label) {
     this.label = label;
     return this;
   }
 
-  Button action(Runnable action) {
+  public Button action(Runnable action) {
     this.action = action;
     return this;
   }
 
-  Button color(int color) {
+  public Button color(int color) {
     this.color = color;
     return this;
   }
 
-  Button fontColor(int color) {
+  public Button fontColor(int color) {
     this.fontColor = color;
     return this;
   }

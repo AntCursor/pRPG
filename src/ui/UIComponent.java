@@ -3,12 +3,12 @@ package ui;
 import types.Vec2;
 
 public abstract class UIComponent {
-  static UIRenderer renderer;
+  public static UIRenderer renderer;
 
   protected Vec2 relPos;
   protected Vec2 relSize;
 
-  UIComponent(Vec2 relPos, Vec2 relSize) {
+  public UIComponent(Vec2 relPos, Vec2 relSize) {
     this.relPos = relPos;
     this.relSize = relSize;
   }
