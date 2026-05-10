@@ -1,30 +1,6 @@
-abstract class UIComponent {
-  static Renderer renderer;
+package ui;
 
-  protected float relX, relY, relW, relH;
-
-  UIComponent(float relX, float relY, float relW, float relH) {
-    this.relX = relX;
-    this.relY = relY;
-    this.relW = relW;
-    this.relH = relH;
-  }
-
-  abstract void draw(float pX, float pY, float pW, float pH);
-
-  void handleClick(float x, float y, float width, float height) {
-  }
-}
-
-interface Renderer {
-  void drawRect(float x, float y, float w, float h);
-
-  void drawText(String str, float x, float y);
-
-  void setColor(int color);
-}
-
-class Panel extends UIComponent {
+public class Panel extends UIComponent {
   private UIComponent[] components;
 
   Panel(float relX, float relY, float relW, float relH) {

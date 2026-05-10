@@ -1,4 +1,6 @@
-class Button extends UIComponent {
+package ui;
+
+public class Button extends UIComponent {
   private String label = "";
   private Runnable action;
   private int color = 0xffffffff;

@@ -1,3 +1,4 @@
+import ui.*;
 import processing.core.*;
 
 class ProcessingRenderer implements Renderer {
