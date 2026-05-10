@@ -4,8 +4,8 @@ import processing.core.*;
 class ProcessingRenderer implements UIRenderer {
   private PApplet sketch;
 
-  int borderRadius;
-  int padding;
+  private int borderRadius;
+  private int padding;
 
   ProcessingRenderer(PApplet sketch, int borderRadius, int padding) {
     this.sketch = sketch;
