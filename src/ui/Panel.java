@@ -1,24 +1,31 @@
 package ui;
 
+import types.Color;
 import types.Vec2;
 
 public class Panel extends UIComponent {
   private UIComponent[] components;
+  private int color = Color.rgba(0x00, 0x00, 0x00, 0x00);
 
-  public Panel(Vec2 relPos, Vec2 relSize) {
-    super(relPos, relSize);
+  public Panel(float x, float y, float w, float h) {
+    super(x, y, w, h);
   }
 
   public Panel() {
-    super(new Vec2(), new Vec2());
+    super(0, 0, 0, 0);
   }
 
   public static Panel root() {
-    return new Panel(new Vec2(0, 0), new Vec2(1, 1));
+    return new Panel(0, 0, 1, 1);
   }
 
   public Panel components(UIComponent[] comps) {
     components = comps;
+    return this;
+  }
+
+  public Panel color(int color) {
+    this.color = color;
     return this;
   }
 
@@ -33,6 +40,10 @@ public class Panel extends UIComponent {
     Vec2 cPos = new Vec2(panelX, panelY);
     Vec2 cSize = new Vec2(panelW, panelH);
 
+    if (Color.a(color) != 0) {
+      renderer.setColor(color);
+      renderer.drawRect(panelX, panelY, panelW, panelH);
+    }
     for (UIComponent c : components) {
       c.draw(cPos, cSize);
     }

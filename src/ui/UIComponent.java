@@ -8,9 +8,14 @@ public abstract class UIComponent {
   protected Vec2 relPos;
   protected Vec2 relSize;
 
-  public UIComponent(Vec2 relPos, Vec2 relSize) {
-    this.relPos = relPos;
-    this.relSize = relSize;
+  protected UIComponent() {
+    relPos = new Vec2(0, 0);
+    relSize = new Vec2(1, 1);
+  }
+
+  public UIComponent(float x, float y, float w, float h) {
+    relPos = new Vec2(x, y);
+    relSize = new Vec2(w, h);
   }
 
   public abstract void draw(Vec2 parentPos, Vec2 parentSize);

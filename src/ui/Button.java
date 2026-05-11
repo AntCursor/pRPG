@@ -3,19 +3,24 @@ package ui;
 import types.Color;
 import types.Vec2;
 
-public class Button extends UIComponent {
-  private String label = "";
+public class Button extends Label {
   private Runnable action = () -> {
   };
   private int color = Color.rgb(0xff, 0xff, 0xff);
-  private int fontColor = Color.rgb(0, 0, 0);
 
-  public Button(Vec2 relPos, Vec2 relSize) {
-    super(relPos, relSize);
+  public Button(float x, float y, float w, float h) {
+    super(x, y, w, h);
   }
 
-  public Button label(String label) {
-    this.label = label;
+  @Override
+  public Button text(String text) {
+    this.text = text;
+    return this;
+  }
+
+  @Override
+  public Button fontColor(int color) {
+    this.fontColor = color;
     return this;
   }
 
@@ -29,24 +34,20 @@ public class Button extends UIComponent {
     return this;
   }
 
-  public Button fontColor(int color) {
-    this.fontColor = color;
-    return this;
-  }
-
   @Override
   public void draw(Vec2 parentPos, Vec2 parentSize) {
     float rectX = relPos.x * parentSize.x + parentPos.x;
     float rectY = relPos.y * parentSize.y + parentPos.y;
-
     float rectW = relSize.x * parentSize.x;
     float rectH = relSize.y * parentSize.y;
 
-    renderer.setColor(color);
-    renderer.drawRect(rectX, rectY, rectW, rectH);
+    if (Color.a(color) != 0) {
+      renderer.setColor(color);
+      renderer.drawRect(rectX, rectY, rectW, rectH);
+    }
 
     renderer.setColor(fontColor);
-    renderer.drawText(label, rectX + rectW * 0.5f, rectY + rectH * 0.5f);
+    renderer.drawText(text, rectX + rectW * 0.5f, rectY + rectH * 0.5f);
   }
 
   @Override
