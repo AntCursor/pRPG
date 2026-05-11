@@ -55,16 +55,16 @@ public class pRPG extends PApplet {
 
     fill(Color.rgb(255, 0, 0));
     rect(drawPos.x, drawPos.y, 40, 40);
-
-    if (mousePressed && mouseButton == LEFT) {
-      rootPanel.handleClick(mousePos, Vec2.origin, screenSize);
-    }
   }
 
   @Override
   public void mousePressed() {
     mousePos.x = mouseX;
     mousePos.y = mouseY;
+
+    if (mouseButton == LEFT) {
+      rootPanel.handleClick(mousePos, Vec2.origin, screenSize);
+    }
   }
 
   @Override
