@@ -3,7 +3,7 @@ package ui;
 import types.Vec2;
 
 public class Image extends UIComponent {
-  private ImageProvider provider;
+  private ImageProvider imgProvider;
   private float maxW = 0, maxH = 0;
 
   public Image(float x, float y, float w, float h) {
@@ -17,7 +17,7 @@ public class Image extends UIComponent {
   }
 
   public Image image(ImageProvider provider) {
-    this.provider = provider;
+    this.imgProvider = provider;
     return this;
   }
 
@@ -30,6 +30,6 @@ public class Image extends UIComponent {
 
     float fitW = maxW == 0 ? absW : maxW * absW;
     float fitH = maxH == 0 ? absH : maxH * absH;
-    renderer.drawImageFit(provider.get(), absX, absY, fitW, fitH);
+    renderer.drawImageFit(imgProvider.get(), absX, absY, fitW, fitH);
   }
 }
