@@ -1,4 +1,4 @@
-package characters;
+package character;
 
 import processing.core.PApplet;
 
@@ -10,7 +10,7 @@ public abstract class Character {
     private int x, y; // Posição no Grid
 
     private PApplet sketch;
-  
+
     private long lastActionTime = 0;
     private long cooldown;
 
@@ -28,18 +28,18 @@ public abstract class Character {
     public void addHp(float hp, float heal) {
         float new_hp = hp + heal;
         hp = new_hp;
-    }    
+    }
 
     public void lostHp(float hp, float damage) {
         float new_hp = hp - damage;
         hp = new_hp;
     }
 
-    public float getHp(){
+    public float getHp() {
         return hp;
     }
 
-    public float getmaxHp(){
+    public float getmaxHp() {
         return maxHp;
     }
 
@@ -51,15 +51,15 @@ public abstract class Character {
         return name;
     }
 
-    public float getPower(){
+    public float getPower() {
         return power;
     }
 
-    public int getX(){
+    public int getX() {
         return x;
     }
 
-    public int getY(){
+    public int getY() {
         return y;
     }
 
@@ -67,11 +67,10 @@ public abstract class Character {
         if (sketch.millis() - lastActionTime >= cooldown) {
             return true;
         }
-            return false;
+        return false;
     }
-    
+
     void Action() {
         lastActionTime = sketch.millis();
     }
 }
-

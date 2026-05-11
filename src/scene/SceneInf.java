@@ -1,4 +1,4 @@
-package scenes;
+package scene;
 
 public interface SceneInf {
     void Sdraw();
