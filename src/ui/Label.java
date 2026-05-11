@@ -4,7 +4,9 @@ import types.Color;
 import types.Vec2;
 
 public class Label extends UIComponent {
-  protected TextProvider textProvider;
+  protected TextProvider textProvider = () -> {
+    return "";
+  };
   protected int fontColor = Color.rgb(0, 0, 0);
 
   protected Label() {
