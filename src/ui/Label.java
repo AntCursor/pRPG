@@ -33,12 +33,16 @@ public class Label extends UIComponent {
     return this;
   }
 
+  protected void drawText(float x, float y) {
+    renderer.setColor(fontColor);
+    renderer.drawText(textProvider.get(), x, y);
+  }
+
   @Override
   public void draw(Vec2 parentPos, Vec2 parentSize) {
     float absX = relPos.x * parentSize.x + parentPos.x;
     float absY = relPos.y * parentSize.y + parentPos.y;
 
-    renderer.setColor(fontColor);
-    renderer.drawText(textProvider.get(), absX, absY);
+    drawText(absX, absY);
   }
 }
