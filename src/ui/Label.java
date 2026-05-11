@@ -4,7 +4,7 @@ import types.Color;
 import types.Vec2;
 
 public class Label extends UIComponent {
-  protected String text = "";
+  protected TextProvider provider;
   protected int fontColor = Color.rgb(0, 0, 0);
 
   protected Label() {
@@ -14,8 +14,15 @@ public class Label extends UIComponent {
     super(x, y, w, h);
   }
 
-  public Label text(String text) {
-    this.text = text;
+  public Label text(TextProvider prov) {
+    this.provider = prov;
+    return this;
+  }
+
+  public Label text(String s) {
+    this.provider = () -> {
+      return s;
+    };
     return this;
   }
 
@@ -30,6 +37,6 @@ public class Label extends UIComponent {
     float absY = relPos.y * parentSize.y + parentPos.y;
 
     renderer.setColor(fontColor);
-    renderer.drawText(text, absX, absY);
+    renderer.drawText(provider.get(), absX, absY);
   }
 }

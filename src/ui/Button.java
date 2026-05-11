@@ -14,7 +14,7 @@ public class Button extends Label {
 
   @Override
   public Button text(String text) {
-    this.text = text;
+    super.text(text);
     return this;
   }
 
@@ -47,7 +47,7 @@ public class Button extends Label {
     }
 
     renderer.setColor(fontColor);
-    renderer.drawText(text, rectX + rectW * 0.5f, rectY + rectH * 0.5f);
+    renderer.drawText(provider.get(), rectX + rectW * 0.5f, rectY + rectH * 0.5f);
   }
 
   @Override
