@@ -64,6 +64,7 @@ public class Panel extends UIComponent {
       if (clickPos.x > absX && clickPos.x < absX + absW &&
           clickPos.y > absY && clickPos.y < absY + absH) {
         c.handleClick(clickPos, new Vec2(absX, absY), new Vec2(absW, absH));
+        break;
       }
     }
   }
