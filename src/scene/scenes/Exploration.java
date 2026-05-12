@@ -24,8 +24,7 @@ public class Exploration extends BaseScene {
 
   @Override
   public void setup() {
-    for (TileType t : TileType.values())
-      assetManager.loadIfNotPresent(t.id, t.path);
+    loadTiles(TileType.DARK_GRASS, TileType.GRASS, TileType.SAND, TileType.STONE);
 
     grid = new Grid(20, 15);
     worldgen(grid);

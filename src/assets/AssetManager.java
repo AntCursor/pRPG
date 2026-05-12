@@ -41,7 +41,8 @@ public class AssetManager<K, V> {
 
   public V loadIfNotPresent(K key, String path) {
     Optional<V> val = get(key);
-    if (val.isPresent()) return val.get();
+    if (val.isPresent())
+      return val.get();
 
     return load(key, path);
   }

@@ -5,6 +5,7 @@ import scene.SceneInf;
 import scene.SceneManager;
 import ui.UIComponent;
 import ui.UIRenderer;
+import assets.TileType;
 
 abstract class BaseScene implements SceneInf {
   protected SceneManager sceneManager;
@@ -16,5 +17,11 @@ abstract class BaseScene implements SceneInf {
     this.sceneManager = manager;
     this.renderer = renderer;
     this.assetManager = assets;
+  }
+
+  public void loadTiles(TileType... types) {
+    for (TileType t : types) {
+      assetManager.loadIfNotPresent(t.id, t.path);
+    }
   }
 }
