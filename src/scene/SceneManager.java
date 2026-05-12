@@ -21,7 +21,10 @@ public class SceneManager {
     currentState = state;
     switch (state) {
       case EXPLORATION:
-        currentScene = new Exploration(this, renderer, assetManager);
+        currentScene = new Exploration(this, renderer, assetManager, 0);
+        break;
+      default:
+        return;
     }
     currentScene.setup();
   }
