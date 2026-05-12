@@ -1,5 +1,5 @@
 package scene;
 
-enum GameState {
-    MENU, EXPLORATION, BATTLE, GAMEOVER
+public enum GameState {
+    MENU, EXPLORATION, BATTLE, GAMEOVER;
 }

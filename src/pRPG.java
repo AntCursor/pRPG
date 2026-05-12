@@ -1,37 +1,16 @@
 import processing.core.*;
-import types.Color;
+import scene.GameState;
+import scene.SceneManager;
 import types.Vec2;
 import ui.*;
 
 public class pRPG extends PApplet {
 
-  Vec2 drawPos = new Vec2();
+  private PUIRenderer renderer;
+  private SceneManager sceneManager;
 
-  PImage nixos;
-  UIComponent rootPanel = Panel.root()
-      .add(
-          new Button(0.0f, 0.75f, 0.5f, 0.25f)
-              .text("Left").action(() -> {
-                drawPos.x -= 1;
-              }))
-      .add(
-          new Button(0.5f, 0.75f, 0.5f, 0.25f)
-              .text("Right").action(() -> {
-                drawPos.x += 1;
-              }))
-      .add(
-          new ProgressBar(0.25f, 0.1f, 0.5f, 0.05f)
-              .value(() -> {
-                return drawPos.x / 100;
-              })
-              .text(() -> {
-                return String.format("%d/%d", (int) drawPos.x, 100);
-              }));
-
-  PUIRenderer pRenderer;
-
-  Vec2 screenSize = new Vec2();
-  Vec2 mousePos = new Vec2();
+  private Vec2 screenSize = new Vec2();
+  private Vec2 mousePos = new Vec2();
 
   @Override
   public void settings() {
@@ -40,25 +19,18 @@ public class pRPG extends PApplet {
 
   @Override
   public void setup() {
-    pRenderer = new PUIRenderer(this, 10, 5);
-
-    noStroke();
-    UIComponent.renderer = pRenderer;
+    renderer = new PUIRenderer(this, 10, 5);
 
     screenSize.x = width;
     screenSize.y = height;
 
-    nixos = loadImage("nixos.png");
+    sceneManager = new SceneManager(renderer);
+    sceneManager.transition(GameState.EXPLORATION);
   }
 
   @Override
   public void draw() {
-    background(Color.rgb(64, 64, 64));
-
-    rootPanel.draw(Vec2.origin, screenSize);
-
-    fill(Color.rgb(255, 0, 0));
-    rect(drawPos.x, drawPos.y, 40, 40);
+    sceneManager.draw(screenSize);
   }
 
   @Override
@@ -67,8 +39,13 @@ public class pRPG extends PApplet {
     mousePos.y = mouseY;
 
     if (mouseButton == LEFT) {
-      rootPanel.handleClick(mousePos, Vec2.origin, screenSize);
+      sceneManager.handleClick(mousePos, screenSize);
     }
+  }
+
+  @Override
+  public void keyPressed() {
+    sceneManager.handleKey(keyCode);
   }
 
   @Override

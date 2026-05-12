@@ -43,7 +43,44 @@ public class PUIRenderer implements UIRenderer {
   @Override
   public void drawImageFit(Object img, float x, float y, float maxW, float maxH) {
     PImage image = (PImage) img;
+    if (image.width == 0 || image.height == 0)
+      return;
     float scale = Math.min(maxW / image.width, maxH / image.height);
     sketch.image(image, x, y, image.width * scale, image.height * scale);
+  }
+
+  @Override
+  public void background(int color) {
+    sketch.background(color);
+  }
+
+  @Override
+  public void noStroke() {
+    sketch.noStroke();
+  }
+
+  @Override
+  public void stroke(int color) {
+    sketch.stroke(color);
+  }
+
+  @Override
+  public void fill(int color) {
+    sketch.fill(color);
+  }
+
+  @Override
+  public int width() {
+    return sketch.width;
+  }
+
+  @Override
+  public int height() {
+    return sketch.height;
+  }
+
+  @Override
+  public Object loadImage(String path) {
+    return sketch.loadImage(path);
   }
 }
