@@ -31,11 +31,12 @@ public class ProgressBar extends Label {
     float absH = relSize.y * parentSize.y;
 
     float progress = floatProvider.get();
+    progress = Math.min(1.f, Math.max(progress, 0.05f));
 
     renderer.setColor(background);
     renderer.drawRect(absX, absY, absW, absH);
 
-    if (progress > 0.03f) {
+    if (progress > 0.f) {
       renderer.setColor(foreground);
 
       float wScale = absW > absH ? progress : 1.f;
