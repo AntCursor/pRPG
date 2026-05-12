@@ -16,6 +16,7 @@ public class AssetManager<K, V> {
     this.renderer = renderer;
   }
 
+  @SuppressWarnings("unchecked")
   public V load(K key, String path) {
     V obj = (V) renderer.loadImage(path);
     keys.add(key);
@@ -36,6 +37,13 @@ public class AssetManager<K, V> {
     }
 
     return Optional.empty();
+  }
+
+  public V loadIfNotPresent(K key, String path) {
+    Optional<V> val = get(key);
+    if (val.isPresent()) return val.get();
+
+    return load(key, path);
   }
 
 }
