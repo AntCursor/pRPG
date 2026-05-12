@@ -24,4 +24,13 @@ public interface UIRenderer {
   int width();
 
   int height();
+
+  void seedNoise(long seed);
+
+  float noise(float x, float y);
+
+  void seedRandom(long seed);
+
+  float random();
+
 }

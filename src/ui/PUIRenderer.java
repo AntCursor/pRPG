@@ -83,4 +83,24 @@ public class PUIRenderer implements UIRenderer {
   public Object loadImage(String path) {
     return sketch.loadImage(path);
   }
+
+  @Override
+  public void seedNoise(long seed) {
+    sketch.noiseSeed(seed);
+  }
+
+  @Override
+  public float noise(float x, float y) {
+    return sketch.noise(x, y);
+  }
+
+  @Override
+  public float random() {
+    return sketch.random(1);
+  }
+
+  @Override
+  public void seedRandom(long seed) {
+    sketch.randomSeed(seed);
+  }
 }
