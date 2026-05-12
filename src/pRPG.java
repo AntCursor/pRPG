@@ -8,21 +8,25 @@ public class pRPG extends PApplet {
   Vec2 drawPos = new Vec2();
 
   PImage nixos;
-  UIComponent rootPanel = Panel.root().components(new UIComponent[] {
-      new Button(0.0f, 0.75f, 0.5f, 0.25f)
-          .text("Left").action(() -> {
-            drawPos.x -= 1;
-          }),
-      new Button(0.5f, 0.75f, 0.5f, 0.25f)
-          .text("Right").action(() -> {
-            drawPos.x += 1;
-          }),
-      new Image(0.f, 0.f, 1.f, 1.f)
-          .image(() -> {
-            return nixos;
-          })
-          .maxSize(1.f, 0.5f),
-  });
+  UIComponent rootPanel = Panel.root()
+      .add(
+          new Button(0.0f, 0.75f, 0.5f, 0.25f)
+              .text("Left").action(() -> {
+                drawPos.x -= 1;
+              }))
+      .add(
+          new Button(0.5f, 0.75f, 0.5f, 0.25f)
+              .text("Right").action(() -> {
+                drawPos.x += 1;
+              }))
+      .add(
+          new ProgressBar(0.25f, 0.1f, 0.5f, 0.05f)
+              .value(() -> {
+                return drawPos.x / 100;
+              })
+              .text(() -> {
+                return String.format("%d/%d", (int) drawPos.x, 100);
+              }));
 
   PUIRenderer pRenderer;
 

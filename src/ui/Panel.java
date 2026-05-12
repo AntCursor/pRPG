@@ -1,10 +1,9 @@
 package ui;
 
-import types.Color;
-import types.Vec2;
+import types.*;
 
 public class Panel extends UIComponent {
-  private UIComponent[] components;
+  private List<UIComponent> components = new List<>();
   private int color = Color.rgba(0x00, 0x00, 0x00, 0x00);
 
   public Panel(float x, float y, float w, float h) {
@@ -19,8 +18,8 @@ public class Panel extends UIComponent {
     return new Panel(0, 0, 1, 1);
   }
 
-  public Panel components(UIComponent[] comps) {
-    components = comps;
+  public Panel add(UIComponent item) {
+    components.add(item);
     return this;
   }
 
