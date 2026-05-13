@@ -31,6 +31,9 @@ public class Image extends UIComponent {
 
     float fitW = maxW == 0 ? absW : maxW * absW;
     float fitH = maxH == 0 ? absH : maxH * absH;
-    renderer.drawImageFit(imgProvider.get(), absX, absY, fitW, fitH);
+    Object img = imgProvider.get();
+    if (img == null)
+      return;
+    renderer.drawImageFit(img, absX, absY, fitW, fitH);
   }
 }

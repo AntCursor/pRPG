@@ -100,11 +100,17 @@ public class Battle extends BaseScene {
   private Panel buildQueueSlot(int idx, float x) {
     return (Panel) new Panel(x, 0.5f, 0.14f, 0.5f)
         .color(Color.rgba(0, 0, 0, 0))
-        .add(new Label(0.5f, 0.5f, 1f, 1f)
+        .add(new Label(0.5f, 0.5f, 1f, 0.4f)
             .text(() -> display.isAlive[idx] ? display.names[idx] : "---")
             .fontColor(Color.rgb(200, 187, 21)))
-        .add(new Image(0.f, 0.f, 0.8f, 0.67f)
-            .image(() -> assetManager.get(display.imgs[idx].id).get()));
+        .add(new Image(0.f, 0.f, 1.f, 0.6f)
+            .image(() -> {
+              TileType tile = display.imgs[idx];
+              if (tile == null)
+                return null;
+
+              return assetManager.get(tile.id).get();
+            }));
   }
 
   private ProgressBar buildHpBar(int idx, float y) {

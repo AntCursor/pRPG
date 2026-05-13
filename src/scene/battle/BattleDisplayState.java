@@ -24,6 +24,8 @@ public class BattleDisplayState {
 
     for (int i = 0; i < BattleQueue.SIZE; i++) {
       BattleCombatant c = queue.get(i);
+      if (c == null)
+        break;
       names[i] = c.getName();
       hpRatios[i] = c.getHpRatio();
       isHero[i] = c.isHero();
