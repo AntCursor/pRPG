@@ -55,15 +55,10 @@ public class Battle extends BaseScene {
 
   @Override
   public void handleClick(Vec2 clickPos, Vec2 screenSize) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'handleClick'");
   }
 
   @Override
   public void handleKey(int keyCode) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method 'handleKey'");
   }
 
 }

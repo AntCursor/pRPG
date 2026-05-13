@@ -32,6 +32,9 @@ public class SceneManager {
       case BATTLE:
         currentScene = new Battle(this, renderer, assetManager, game);
         break;
+      case GAMEOVER:
+        currentScene = new GameOver(this, renderer, assetManager, game);
+        break;
       default:
         return;
     }
@@ -53,4 +56,5 @@ public class SceneManager {
   public void handleKey(int keyCode) {
     currentScene.handleKey(keyCode);
   }
+
 }
