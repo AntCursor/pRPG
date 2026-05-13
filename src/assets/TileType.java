@@ -1,28 +1,35 @@
 package assets;
 
 public enum TileType {
-  DARK_GRASS((byte) 0, "darkgrass.png"),
-  GRASS((byte) 1, "grass.png"),
-  SAND((byte) 2, "sand.png"),
-  STONE((byte) 3, "stone.png", true);
+  DARK_GRASS(0, "tiles/darkgrass.png"),
+  GRASS(1, "tiles/grass.png"),
+  SAND(2, "tiles/sand.png"),
+  STONE(3, "tiles/stone.png", true),
 
-  public final byte id;
+  MENU_BACK(4, "ui/menu_back.png"),
+  TITLE(5, "ui/title.png"),
+  GAMEOVER(6, "ui/overgame.png"),
+
+  LEVI(7, "entities/levi1.png"),
+  LEVI_FACE(8, "entities/levi.png");
+
+  public final int id;
   public final String path;
   public final boolean isSolid;
 
-  TileType(byte id, String path) {
+  TileType(int id, String path) {
     this.id = id;
     this.path = path;
     this.isSolid = false;
   }
 
-  TileType(byte id, String path, boolean isSolid) {
+  TileType(int id, String path, boolean isSolid) {
     this.id = id;
     this.path = path;
     this.isSolid = isSolid;
   }
 
-  public static TileType fromId(byte id) {
+  public static TileType fromId(int id) {
     for (TileType t : values())
       if (t.id == id)
         return t;
