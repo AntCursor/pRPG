@@ -6,7 +6,6 @@ import core.GameContext;
 import grid.Grid;
 import grid.GridRenderer;
 
-
 public abstract class Character {
     protected String name;
     protected int x, y;
@@ -55,6 +54,11 @@ public abstract class Character {
             return false;
 
         return !TileType.fromId(grid.get(nextX, nextY)).isSolid;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public Character maxHp(float maxHp) {
@@ -119,6 +123,10 @@ public abstract class Character {
 
     public boolean isAlive() {
         return hp > 0;
+    }
+
+    public TileType getSprite() {
+        return sprite;
     }
 
     public enum Direction {

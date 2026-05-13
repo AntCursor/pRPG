@@ -15,7 +15,6 @@ public class BattleQueue {
     sort();
   }
 
-  // Selection sort descending by effective speed
   public void sort() {
     for (int i = 0; i < SIZE - 1; i++) {
       int maxIdx = i;

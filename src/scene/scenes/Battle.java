@@ -18,9 +18,8 @@ import ui.components.*;
 public class Battle extends BaseScene {
   private BattleManager battleManager;
   private Team heroes;
-  private Team enemies;
+  private Team enemyTeam;
 
-  // Cached display state, refreshed every draw
   private BattleDisplayState display;
 
   public Battle(
@@ -29,27 +28,25 @@ public class Battle extends BaseScene {
       AssetManager assets,
       GameContext game,
       Team heroes,
-      Team enemies) {
+      Team enemyTeam) {
     super(manager, renderer, assets, game);
     this.heroes = heroes;
-    this.enemies = enemies;
+    this.enemyTeam = enemyTeam;
   }
 
   @Override
   public void setup() {
     assetManager.loadTiles(TileType.LEVI_FACE, TileType.CRASH, TileType.BATTLE_BG);
-    battleManager = new BattleManager(heroes, enemies, game);
+    battleManager = new BattleManager(heroes, enemyTeam, game);
     display = battleManager.getDisplayState();
     buildUI();
   }
 
   private void buildUI() {
     rootPanel = Panel.root()
-        // Background
         .add(new Image(0, 0, 1, 1)
             .image(() -> assetManager.get(TileType.BATTLE_BG.id).get()))
 
-        // Initiative bar — shows queue order, highlights current turn
         .add(new Panel(0.15f, 0.02f, 0.7f, 0.1f)
             .color(Color.rgba(0, 0, 0, 180))
             .add(new Label(0.5f, 0.1f, 1f, 0.4f)
@@ -62,29 +59,25 @@ public class Battle extends BaseScene {
             .add(buildQueueSlot(4, 0.73f))
             .add(buildQueueSlot(5, 0.90f)))
 
-        // Hero HP bars
         .add(new Panel(0f, 0.65f, 0.5f, 0.15f)
             .color(Color.rgba(0, 0, 0, 150))
             .add(buildHpBar(0, 0.1f))
             .add(buildHpBar(1, 0.4f))
             .add(buildHpBar(2, 0.7f)))
 
-        // Enemy HP bars
         .add(new Panel(0.5f, 0.65f, 0.5f, 0.15f)
             .color(Color.rgba(0, 0, 0, 150))
             .add(buildHpBar(3, 0.1f))
             .add(buildHpBar(4, 0.4f))
             .add(buildHpBar(5, 0.7f)))
 
-        // Last action log
         .add(new Label(0.5f, 0.78f, 0.8f, 0.04f)
             .text(() -> display.lastResult == null ? ""
-                : display.lastResult.attackerName + " used " +
-                    display.lastResult.action.label + " for " +
-                    (int) display.lastResult.value)
+                : display.lastResult.attackerName + " used "
+                    + display.lastResult.action.label + " for "
+                    + (int) display.lastResult.value)
             .fontColor(Color.rgb(255, 255, 255)))
 
-        // Action menu
         .add(new Panel(0f, 0.8f, 1f, 0.2f)
             .color(Color.rgba(15, 15, 20, 240))
             .add(new Label(0.15f, 0.3f, 0.2f, 0.2f)
@@ -104,20 +97,20 @@ public class Battle extends BaseScene {
                 .action(() -> battleManager.act(BattleAction.POTION))));
   }
 
-  // Queue slot: name label, colored by hero/enemy, dimmed if dead
-  private Panel buildQueueSlot(int queueIndex, float x) {
+  private Panel buildQueueSlot(int idx, float x) {
     return (Panel) new Panel(x, 0.5f, 0.14f, 0.5f)
         .color(Color.rgba(0, 0, 0, 0))
         .add(new Label(0.5f, 0.5f, 1f, 1f)
-            .text(() -> display.isAlive[queueIndex] ? display.names[queueIndex] : "---")
-            .fontColor(Color.rgb(200, 187, 21)));
+            .text(() -> display.isAlive[idx] ? display.names[idx] : "---")
+            .fontColor(Color.rgb(200, 187, 21)))
+        .add(new Image(0.f, 0.f, 0.8f, 0.67f)
+            .image(() -> assetManager.get(display.imgs[idx].id).get()));
   }
 
-  // HP bar reading from display snapshot
-  private ProgressBar buildHpBar(int queueIndex, float y) {
+  private ProgressBar buildHpBar(int idx, float y) {
     return (ProgressBar) new ProgressBar(0.05f, y, 0.9f, 0.25f)
-        .value(() -> display.hpRatios[queueIndex])
-        .text(() -> display.names[queueIndex]);
+        .value(() -> display.hpRatios[idx])
+        .text(() -> display.names[idx]);
   }
 
   @Override
@@ -126,6 +119,7 @@ public class Battle extends BaseScene {
     display = battleManager.getDisplayState();
 
     if (display.state == BattleState.BATTLE_WON) {
+      enemyTeam.setDefeated();
       sceneManager.transition(GameState.EXPLORATION);
       return;
     }

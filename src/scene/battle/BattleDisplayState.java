@@ -1,8 +1,11 @@
 package scene.battle;
 
+import assets.TileType;
+
 public class BattleDisplayState {
   // Queue slots — name and HP ratio for each position
   public final String[] names = new String[BattleQueue.SIZE];
+  public final TileType[] imgs = new TileType[BattleQueue.SIZE];
   public final float[] hpRatios = new float[BattleQueue.SIZE];
   public final boolean[] isHero = new boolean[BattleQueue.SIZE];
   public final boolean[] isAlive = new boolean[BattleQueue.SIZE];
@@ -25,6 +28,7 @@ public class BattleDisplayState {
       hpRatios[i] = c.getHpRatio();
       isHero[i] = c.isHero();
       isAlive[i] = c.isAlive();
+      imgs[i] = c.getSprite();
     }
 
     this.currentTurnIndex = currentTurnIndex;

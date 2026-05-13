@@ -1,5 +1,6 @@
 package scene.battle;
 
+import assets.TileType;
 import character.Character;
 
 public class BattleCombatant {
@@ -45,5 +46,9 @@ public class BattleCombatant {
 
   public float getMaxHp() {
     return character.getMaxHp();
+  }
+
+  public TileType getSprite() {
+    return character.getSprite();
   }
 }

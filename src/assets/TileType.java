@@ -22,8 +22,10 @@ public enum TileType {
   CRASH(14, "entities/crash1.png"),
 
   MAN(15, "entities/man.png"),
-  //ENEMAN(16, "entities/redman.png");
-  BATTLE_BG(17, "ui/battle_bg.png");
+  ENEMAN(16, "entities/redman.png"),
+  BATTLE_BG(17, "ui/battle_bg.png"),
+
+  BONZI(18, "entities/bonzi.png");
 
   public final int id;
   public final String path;
