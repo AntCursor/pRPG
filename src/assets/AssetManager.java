@@ -1,36 +1,34 @@
 package assets;
 
-import ui.UIRenderer;
-
 import java.util.Iterator;
 import java.util.Optional;
 
+import core.GameContext;
 import types.List;
 
-public class AssetManager<K, V> {
-  private UIRenderer renderer;
-  private List<K> keys = new List<>();
-  private List<V> assets = new List<>();
+public class AssetManager {
+  private GameContext game;
+  private List<Integer> keys = new List<>();
+  private List<Object> assets = new List<>();
 
-  public AssetManager(UIRenderer renderer) {
-    this.renderer = renderer;
+  public AssetManager(GameContext game) {
+    this.game = game;
   }
 
-  @SuppressWarnings("unchecked")
-  public V load(K key, String path) {
-    V obj = (V) renderer.loadImage(path);
+  public Object load(int key, String path) {
+    Object obj = game.loadImage(path);
     keys.add(key);
     assets.add(obj);
     return obj;
   }
 
-  public Optional<V> get(K key) {
-    Iterator<V> assetsIter = assets.iterator();
-    Iterator<K> keysIter = keys.iterator();
+  public Optional<Object> get(int key) {
+    Iterator<Object> assetsIter = assets.iterator();
+    Iterator<Integer> keysIter = keys.iterator();
 
     while (assetsIter.hasNext()) {
-      K ikey = keysIter.next();
-      V iasset = assetsIter.next();
+      Integer ikey = keysIter.next();
+      Object iasset = assetsIter.next();
 
       if (ikey.equals(key))
         return Optional.of(iasset);
@@ -39,8 +37,8 @@ public class AssetManager<K, V> {
     return Optional.empty();
   }
 
-  public V loadIfNotPresent(K key, String path) {
-    Optional<V> val = get(key);
+  public Object loadIfNotPresent(int key, String path) {
+    Optional<Object> val = get(key);
     if (val.isPresent())
       return val.get();
 

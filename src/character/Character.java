@@ -1,45 +1,96 @@
 package character;
 
-import processing.core.PApplet;
+import assets.AssetManager;
+import assets.TileType;
+import core.GameContext;
+import grid.Grid;
+import ui.UIRenderer;
 
 public abstract class Character {
-    private String name;
-    private float hp, maxHp;
-    private float speed;
-    private float power;
-    private int x, y; // Posição no Grid
+    protected String name;
+    protected int x, y;
 
-    private PApplet sketch;
+    protected float maxHp = 100;
+    protected float hp = maxHp;
+    protected float speed = 1;
+    protected float power = 10;
 
-    private long lastActionTime = 0;
-    private long cooldown;
+    protected long lastActionTime = 0;
+    protected long cooldown = 2000;
 
-    public Character(String name, float speed, float maxHp, long cd) {
+    public Character(String name, int x, int y) {
         this.name = name;
-        this.speed = speed;
-        this.cooldown = cd;
+        this.x = x;
+        this.y = y;
+    }
+
+    public abstract void update(GameContext game, Grid grid);
+
+    public abstract void draw(UIRenderer renderer, AssetManager assets, Grid grid);
+
+    protected boolean canMove(Direction dir, Grid grid) {
+        int offX = 0;
+        int offY = 0;
+        switch (dir) {
+            case LEFT:
+                offX = -1;
+                break;
+            case RIGHT:
+                offX = 1;
+                break;
+            case UP:
+                offY = -1;
+                break;
+            case DOWN:
+                offY = 1;
+                break;
+        }
+
+        int nextX = x + offX;
+        int nextY = y + offY;
+        if (nextX == grid.sizeX() || nextX < 0 || nextY == grid.sizeY() || nextY < 0)
+            return false;
+
+        return !TileType.fromId(grid.get(nextX, nextY)).isSolid;
+    }
+
+    public Character maxHp(float maxHp) {
         this.maxHp = maxHp;
+        return this;
     }
 
-    public void setinitialHp(float maxHp) {
-        this.hp = maxHp;
+    public Character speed(float speed) {
+        this.speed = speed;
+        return this;
     }
 
-    public void addHp(float hp, float heal) {
-        float new_hp = hp + heal;
-        hp = new_hp;
+    public Character power(float power) {
+        this.power = power;
+        return this;
     }
 
-    public void lostHp(float hp, float damage) {
-        float new_hp = hp - damage;
-        hp = new_hp;
+    public Character cooldown(long cooldown) {
+        this.cooldown = cooldown;
+        return this;
+    }
+
+    public void setHp(float hp) {
+        this.hp = Math.min(hp, maxHp);
+    }
+
+    public void addHp(float heal) {
+        hp = Math.min(hp + heal, maxHp);
+    }
+
+    public void lostHp(float damage) {
+        hp = Math.max(hp - damage, 0);
     }
 
     public float getHp() {
         return hp;
     }
 
-    public float getmaxHp() {
+    public float getMaxHp() {
         return maxHp;
     }
 
@@ -63,14 +114,7 @@ public abstract class Character {
         return y;
     }
 
-    public boolean canAct() {
-        if (sketch.millis() - lastActionTime >= cooldown) {
-            return true;
-        }
-        return false;
-    }
-
-    void Action() {
-        lastActionTime = sketch.millis();
+    public enum Direction {
+        LEFT, RIGHT, UP, DOWN
     }
 }

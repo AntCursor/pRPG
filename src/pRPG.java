@@ -1,12 +1,15 @@
+import processing.PGameContext;
+import processing.PUIRenderer;
 import processing.core.*;
 import scene.GameState;
 import scene.SceneManager;
 import types.Vec2;
-import ui.*;
+import ui.components.UIComponent;
 
 public class pRPG extends PApplet {
 
   private PUIRenderer renderer;
+  private PGameContext gameContext;
   private SceneManager sceneManager;
 
   private Vec2 screenSize = new Vec2();
@@ -20,12 +23,15 @@ public class pRPG extends PApplet {
   @Override
   public void setup() {
     renderer = new PUIRenderer(this, 10, 5);
+    UIComponent.renderer = renderer;
+
+    gameContext = new PGameContext(this);
+
+    sceneManager = new SceneManager(renderer, gameContext);
+    sceneManager.transition(GameState.MAIN_MENU);
 
     screenSize.x = width;
     screenSize.y = height;
-
-    sceneManager = new SceneManager(renderer);
-    sceneManager.transition(GameState.EXPLORATION);
   }
 
   @Override
@@ -34,13 +40,11 @@ public class pRPG extends PApplet {
   }
 
   @Override
-  public void mousePressed() {
-    mousePos.x = mouseX;
-    mousePos.y = mouseY;
+  public void mouseClicked() {
+    mousePos.x = pmouseX;
+    mousePos.y = pmouseY;
 
-    if (mouseButton == LEFT) {
-      sceneManager.handleClick(mousePos, screenSize);
-    }
+    sceneManager.handleClick(mousePos, screenSize);
   }
 
   @Override

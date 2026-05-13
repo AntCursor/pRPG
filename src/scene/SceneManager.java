@@ -1,7 +1,9 @@
 package scene;
 
 import assets.AssetManager;
+import core.GameContext;
 import scene.scenes.Exploration;
+import scene.scenes.MainMenu;
 import types.Vec2;
 import ui.UIRenderer;
 
@@ -9,19 +11,24 @@ public class SceneManager {
   private SceneInf currentScene;
   private GameState currentState;
   private UIRenderer renderer;
+  private GameContext game;
 
-  private AssetManager<Byte, Object> assetManager;
+  private AssetManager assetManager;
 
-  public SceneManager(UIRenderer renderer) {
+  public SceneManager(UIRenderer renderer, GameContext game) {
     this.renderer = renderer;
-    assetManager = new AssetManager<>(renderer);
+    this.game = game;
+    assetManager = new AssetManager(game);
   }
 
   public void transition(GameState state) {
     currentState = state;
     switch (state) {
       case EXPLORATION:
-        currentScene = new Exploration(this, renderer, assetManager, 0);
+        currentScene = new Exploration(this, renderer, assetManager, game, 0);
+        break;
+      case MAIN_MENU:
+        currentScene = new MainMenu(this, renderer, assetManager, game);
         break;
       default:
         return;

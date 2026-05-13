@@ -45,6 +45,10 @@ public class GridRenderer {
     }
   }
 
+  public void renderOn(Object img, int x, int y) {
+    renderer.drawImageFit(img, x * w, y * h, w, h);
+  }
+
   public void updateDimensions() {
     w = renderer.width() / (float) grid.sizeX();
     h = renderer.height() / (float) grid.sizeY();
