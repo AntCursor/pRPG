@@ -7,8 +7,6 @@ public interface UIRenderer {
 
   void setColor(int color);
 
-  Object loadImage(String path);
-
   void drawImage(Object img, float x, float y, float w, float h);
 
   void drawImageFit(Object img, float x, float y, float maxW, float maxH);
@@ -24,13 +22,4 @@ public interface UIRenderer {
   int width();
 
   int height();
-
-  void seedNoise(long seed);
-
-  float noise(float x, float y);
-
-  void seedRandom(long seed);
-
-  float random();
-
 }
