@@ -30,6 +30,8 @@ public class pRPG extends PApplet {
     sceneManager = new SceneManager(renderer, gameContext);
     sceneManager.transition(GameState.MAIN_MENU);
 
+    windowResizable(true);
+
     screenSize.x = width;
     screenSize.y = height;
   }
@@ -56,6 +58,8 @@ public class pRPG extends PApplet {
   public void windowResized() {
     screenSize.x = width;
     screenSize.y = height;
+
+
   }
 
   public static void main(String[] args) {
