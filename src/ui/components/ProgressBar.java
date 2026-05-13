@@ -13,6 +13,8 @@ public class ProgressBar extends Label {
 
   public ProgressBar(float x, float y, float w, float h) {
     super(x, y, w, h);
+    this.background = Color.rgb(200, 200, 200);
+    this.foreground = Color.rgb(0, 200, 80);
   }
 
   public ProgressBar value(FloatProvider fprov) {
