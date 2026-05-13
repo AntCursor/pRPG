@@ -30,7 +30,8 @@ public class Exploration extends BaseScene {
 
   @Override
   public void setup() {
-    assetManager.loadTiles(TileType.DARK_GRASS, TileType.GRASS, TileType.SAND, TileType.STONE);
+    assetManager.loadTiles(TileType.DARK_GRASS, TileType.GRASS, TileType.SAND, TileType.STONE,
+      TileType.MAN);
 
     grid = new Grid(20, 15);
     worldgen(grid);
@@ -71,5 +72,7 @@ public class Exploration extends BaseScene {
 
       grid.set(x, y, type);
     });
+
+    grid.set(1, 1, (byte) 1);
   }
 }

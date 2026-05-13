@@ -5,7 +5,7 @@ import assets.TileType;
 import core.GameContext;
 import grid.Grid;
 import grid.GridRenderer;
-import ui.UIRenderer;
+
 
 public abstract class Character {
     protected String name;
@@ -29,7 +29,7 @@ public abstract class Character {
 
     public abstract void update(GameContext game, Grid grid);
 
-    public abstract void draw(UIRenderer renderer, AssetManager assets, GridRenderer GridRenderer);
+    public abstract void draw(GridRenderer GridRenderer, AssetManager assets);
 
     protected boolean canMove(Direction dir, Grid grid) {
         int offX = 0;
@@ -115,6 +115,10 @@ public abstract class Character {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isAlive() {
+        return hp > 0;
     }
 
     public enum Direction {

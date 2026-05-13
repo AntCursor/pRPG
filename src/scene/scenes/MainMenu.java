@@ -87,7 +87,7 @@ public class MainMenu extends BaseScene {
                                 .color(Color.rgb(50, 100, 200))
                                 .fontColor(Color.rgb(255, 255, 255))
                                 .action(() -> {
-                                    sceneManager.transition(GameState.BATTLE);
+                                    sceneManager.transition(GameState.EXPLORATION);
                                 }));
     }
 
