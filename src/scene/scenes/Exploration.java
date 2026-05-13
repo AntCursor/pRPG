@@ -2,6 +2,7 @@ package scene.scenes;
 
 import assets.AssetManager;
 import assets.TileType;
+import core.GameContext;
 import grid.Grid;
 import grid.GridRenderer;
 import grid.GridRenderer.ImageMap;
@@ -17,8 +18,13 @@ public class Exploration extends BaseScene {
   private float noiseScale = 0.15f;
   private long seed;
 
-  public Exploration(SceneManager manager, UIRenderer renderer, AssetManager<Byte, Object> assets, long seed) {
-    super(manager, renderer, assets);
+  public Exploration(
+      SceneManager manager,
+      UIRenderer renderer,
+      AssetManager assets,
+      GameContext game,
+      long seed) {
+    super(manager, renderer, assets, game);
     this.seed = seed;
   }
 
@@ -47,11 +53,11 @@ public class Exploration extends BaseScene {
   }
 
   private void worldgen(Grid grid) {
-    renderer.seedNoise(seed);
-    renderer.seedRandom(seed);
+    game.seedNoise(seed);
+    game.seedRandom(seed);
 
     grid.forEach((x, y) -> {
-      float nos = renderer.noise(x * noiseScale, y * noiseScale);
+      float nos = game.noise(x * noiseScale, y * noiseScale);
       byte type;
       if (nos < 0.4)
         type = 0;
@@ -60,7 +66,7 @@ public class Exploration extends BaseScene {
       else
         type = 2;
 
-      if (renderer.random() > 0.9)
+      if (game.random() > 0.9)
         type = 3;
 
       grid.set(x, y, type);
