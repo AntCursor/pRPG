@@ -45,4 +45,9 @@ public class AssetManager {
     return load(key, path);
   }
 
+  public void loadTiles(TileType... types) {
+    for (TileType t : types) {
+      this.loadIfNotPresent(t.id, t.path);
+    }
+  }
 }

@@ -11,7 +11,19 @@ public enum TileType {
   GAMEOVER(6, "ui/overgame.png"),
 
   LEVI(7, "entities/levi1.png"),
-  LEVI_FACE(8, "entities/levi.png");
+  LEVI_FACE(8, "entities/levi.png"),
+
+  MIKU(9, "entities/miku.png"),
+  OGRE(10, "entities/ogre.png"),
+  OK(11, "entities/ok.png"),
+  SANS(12, "entities/sans.png"),
+
+  CRASH_FACE(13, "entities/crash.png"),
+  CRASH(14, "entities/crash1.png"),
+
+  MAN(15, "entities/man.png"),
+
+  BATTLE_BG(15, "ui/battle_bg.png");
 
   public final int id;
   public final String path;

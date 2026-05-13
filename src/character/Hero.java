@@ -3,11 +3,12 @@ package character;
 import assets.AssetManager;
 import core.GameContext;
 import grid.Grid;
+import grid.GridRenderer;
 import ui.UIRenderer;
 
-public class Player extends Character {
+public class Hero extends Character {
 
-  public Player(String name, int x, int y) {
+  public Hero(String name, int x, int y) {
     super(name, x, y);
   }
 
@@ -17,7 +18,7 @@ public class Player extends Character {
   }
 
   @Override
-  public void draw(UIRenderer renderer, AssetManager assets, Grid grid) {
+  public void draw(UIRenderer renderer, AssetManager assets, GridRenderer gRenderer) {
   }
 
 }

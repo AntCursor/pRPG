@@ -2,8 +2,7 @@ package scene;
 
 import assets.AssetManager;
 import core.GameContext;
-import scene.scenes.Exploration;
-import scene.scenes.MainMenu;
+import scene.scenes.*;
 import types.Vec2;
 import ui.UIRenderer;
 
@@ -29,6 +28,9 @@ public class SceneManager {
         break;
       case MAIN_MENU:
         currentScene = new MainMenu(this, renderer, assetManager, game);
+        break;
+      case BATTLE:
+        currentScene = new Battle(this, renderer, assetManager, game);
         break;
       default:
         return;

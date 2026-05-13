@@ -5,7 +5,6 @@ import scene.SceneInf;
 import scene.SceneManager;
 import ui.UIRenderer;
 import ui.components.UIComponent;
-import assets.TileType;
 import core.GameContext;
 
 abstract class BaseScene implements SceneInf {
@@ -28,9 +27,4 @@ abstract class BaseScene implements SceneInf {
     this.game = game;
   }
 
-  public void loadTiles(TileType... types) {
-    for (TileType t : types) {
-      assetManager.loadIfNotPresent(t.id, t.path);
-    }
-  }
 }

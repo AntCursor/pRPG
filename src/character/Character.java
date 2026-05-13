@@ -4,6 +4,7 @@ import assets.AssetManager;
 import assets.TileType;
 import core.GameContext;
 import grid.Grid;
+import grid.GridRenderer;
 import ui.UIRenderer;
 
 public abstract class Character {
@@ -18,6 +19,8 @@ public abstract class Character {
     protected long lastActionTime = 0;
     protected long cooldown = 2000;
 
+    protected TileType sprite;
+
     public Character(String name, int x, int y) {
         this.name = name;
         this.x = x;
@@ -26,7 +29,7 @@ public abstract class Character {
 
     public abstract void update(GameContext game, Grid grid);
 
-    public abstract void draw(UIRenderer renderer, AssetManager assets, Grid grid);
+    public abstract void draw(UIRenderer renderer, AssetManager assets, GridRenderer GridRenderer);
 
     protected boolean canMove(Direction dir, Grid grid) {
         int offX = 0;

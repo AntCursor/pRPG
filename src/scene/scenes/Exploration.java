@@ -30,7 +30,7 @@ public class Exploration extends BaseScene {
 
   @Override
   public void setup() {
-    loadTiles(TileType.DARK_GRASS, TileType.GRASS, TileType.SAND, TileType.STONE);
+    assetManager.loadTiles(TileType.DARK_GRASS, TileType.GRASS, TileType.SAND, TileType.STONE);
 
     grid = new Grid(20, 15);
     worldgen(grid);
