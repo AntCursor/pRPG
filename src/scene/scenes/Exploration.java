@@ -71,15 +71,12 @@ public class Exploration extends BaseScene {
 
     rootPanel = Panel.root()
 
-        // ── Fundo escuro do HUD (faixa direita 20%) ──────────────
         .add(new Panel(0.8f, 0.0f, 0.2f, 1.0f)
             .color(Color.rgba(10, 10, 26, 230)))
 
-        // Separador esquerdo do HUD
         .add(new Panel(0.8f, 0.0f, 0.002f, 1.0f)
             .color(Color.rgba(221, 196, 74, 100)))
 
-        // ── Título ───────────────────────────────────────────────
         .add(new Label(0.9f, 0.04f, 0.18f, 0.035f)
             .text("EQUIPE HERÓI")
             .fontColor(Color.rgb(221, 196, 74)))
@@ -88,12 +85,10 @@ public class Exploration extends BaseScene {
             .text(() -> "Poder: " + hero.getPower())
             .fontColor(Color.rgb(180, 180, 220)))
 
-        // ── XP bar ───────────────────────────────────────────────
         .add(new ProgressBar(0.81f, 0.115f, 0.17f, 0.014f)
             .value(() -> 0.3f) // TODO: xp real
             .text(() -> "XP 30/100"))
 
-        // ── Membro 0 ─────────────────────────────────────────────
         .add(new Label(0.9f, 0.17f, 0.18f, 0.03f)
             .text(() -> hero.getName())
             .fontColor(Color.rgb(230, 230, 240)))
@@ -102,7 +97,6 @@ public class Exploration extends BaseScene {
             .value(() -> hero.getHp() / hero.getMaxHp())
             .text(() -> (int) hero.getHp() + "/" + (int) hero.getMaxHp() + " HP"))
 
-        // ── Membro 1 ─────────────────────────────────────────────
         .add(new Label(0.9f, 0.25f, 0.18f, 0.03f)
             .text("Brynn")
             .fontColor(Color.rgb(230, 230, 240)))
@@ -111,7 +105,6 @@ public class Exploration extends BaseScene {
             .value(() -> 0.75f)
             .text("75/100 HP"))
 
-        // ── Membro 2 ─────────────────────────────────────────────
         .add(new Label(0.9f, 0.33f, 0.18f, 0.03f)
             .text("Cael")
             .fontColor(Color.rgb(230, 230, 240)))
@@ -120,11 +113,9 @@ public class Exploration extends BaseScene {
             .value(() -> 0.4f)
             .text("40/100 HP"))
 
-        // ── Separador ────────────────────────────────────────────
         .add(new Panel(0.81f, 0.415f, 0.17f, 0.002f)
             .color(Color.rgba(60, 60, 100, 180)))
 
-        // ── Inimigos restantes ───────────────────────────────────
         .add(new Label(0.9f, 0.435f, 0.18f, 0.03f)
             .text("INIMIGOS")
             .fontColor(Color.rgb(221, 196, 74)))
@@ -133,19 +124,15 @@ public class Exploration extends BaseScene {
             .text("4/4") // TODO: dinâmico
             .fontColor(Color.rgb(200, 80, 80)))
 
-        // ── Separador ────────────────────────────────────────────
         .add(new Panel(0.81f, 0.535f, 0.17f, 0.002f)
             .color(Color.rgba(60, 60, 100, 180)))
 
-        // ── Cooldown do herói ────────────────────────────────────
         .add(new Label(0.9f, 0.555f, 0.18f, 0.03f)
             .text("COOLDOWN")
             .fontColor(Color.rgb(221, 196, 74)))
 
         .add(new ProgressBar(0.81f, 0.588f, 0.17f, 0.014f)
             .value(() -> {
-              // 0.0 = no cooldown; 1.0 = pronto
-              // lastActionTime fica em Character, expor via getter
               return Math.min(1f, (game.millis() - 0L) / 2000f);
             })
             .text(() -> {
