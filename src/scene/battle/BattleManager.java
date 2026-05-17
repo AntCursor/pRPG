@@ -24,7 +24,7 @@ public class BattleManager {
     determineState();
   }
 
-  // Called every frame by the scene
+  
   public void update() {
     if (state == BattleState.WAITING_ENEMY) {
       if (game.millis() - enemyTurnStart >= ENEMY_TURN_DELAY) {
@@ -39,7 +39,7 @@ public class BattleManager {
     }
   }
 
-  // Called by the scene when player picks an action
+
   public void act(BattleAction action) {
     if (state != BattleState.WAITING_PLAYER)
       return;
@@ -88,7 +88,7 @@ public class BattleManager {
       enemyTurnStart = game.millis();
   }
 
-  // The only window into BattleManager the scene gets
+  
   public BattleDisplayState getDisplayState() {
     return new BattleDisplayState(
         queue,

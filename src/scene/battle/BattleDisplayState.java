@@ -3,7 +3,7 @@ package scene.battle;
 import assets.TileType;
 
 public class BattleDisplayState {
-  // Queue slots — name and HP ratio for each position
+
   public final String[] names = new String[BattleQueue.SIZE];
   public final TileType[] imgs = new TileType[BattleQueue.SIZE];
   public final float[] hpRatios = new float[BattleQueue.SIZE];
@@ -13,7 +13,7 @@ public class BattleDisplayState {
   public final int currentTurnIndex;
   public final boolean isPlayerTurn;
   public final BattleState state;
-  public final TurnResult lastResult; // may be null on first turn
+  public final TurnResult lastResult;
 
   public BattleDisplayState(
       BattleQueue queue,

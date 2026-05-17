@@ -4,7 +4,7 @@ public class TurnResult {
   public final String attackerName;
   public final String targetName;
   public final BattleAction action;
-  public final float value; // damage dealt or HP healed
+  public final float value;
 
   public TurnResult(String attackerName, String targetName, BattleAction action, float value) {
     this.attackerName = attackerName;

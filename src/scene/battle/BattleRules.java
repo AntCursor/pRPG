@@ -23,7 +23,7 @@ public class BattleRules {
       case POTION:
         value = attacker.getMaxHp() * POTION_HEAL_RATIO;
         attacker.applyHeal(value);
-        target = attacker; // heal self, reflect in result
+        target = attacker;
         break;
       default:
         value = 0;
@@ -33,7 +33,7 @@ public class BattleRules {
   }
 
   public static BattleAction randomEnemyAction(float random) {
-    // Weighted: 60% attack, 30% skill, 10% nothing (treated as attack)
+
     if (random < 0.6f)
       return BattleAction.ATTACK;
     if (random < 0.9f)
