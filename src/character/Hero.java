@@ -7,10 +7,7 @@ import grid.Grid;
 import grid.GridRenderer;
 
 public class Hero extends Character {
-
   private Direction pendingDirection = null;
-
-  private TileType sprite = TileType.MAN;
 
   public Hero(String name, int x, int y) {
     super(name, x, y);
@@ -18,7 +15,17 @@ public class Hero extends Character {
     this.hp = 100;
     this.speed = 5;
     this.power = 15;
-    this.cooldown = 2000; // 2s entre os moves
+    this.cooldown = 500;
+    this.sprite = TileType.MAN;
+  }
+
+  public void setPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public void resetHp() {
+    this.hp = this.maxHp;
   }
 
   public void queueDirection(int keyCode) {
@@ -39,8 +46,6 @@ public class Hero extends Character {
       case 'd':
         pendingDirection = Direction.RIGHT;
         break;
-      default:
-        break;
     }
   }
 
@@ -48,18 +53,14 @@ public class Hero extends Character {
   public void update(GameContext game, Grid grid) {
     if (pendingDirection == null)
       return;
-
     Direction dir = pendingDirection;
     pendingDirection = null;
 
-    boolean cooldownOk = (game.millis() - lastActionTime) >= cooldown;
+    if ((game.millis() - lastActionTime) < cooldown)
+      return;
+    if (!canMove(dir, grid))
+      return;
 
-    if (cooldownOk == false) {
-      return;
-    }
-    if (canMove(dir, grid) == false) {
-      return;
-    }
     switch (dir) {
       case UP:
         y -= 1;

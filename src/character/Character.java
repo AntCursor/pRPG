@@ -28,11 +28,10 @@ public abstract class Character {
 
     public abstract void update(GameContext game, Grid grid);
 
-    public abstract void draw(GridRenderer GridRenderer, AssetManager assets);
+    public abstract void draw(GridRenderer gridRenderer, AssetManager assets);
 
     protected boolean canMove(Direction dir, Grid grid) {
-        int offX = 0;
-        int offY = 0;
+        int offX = 0, offY = 0;
         switch (dir) {
             case LEFT:
                 offX = -1;
@@ -47,18 +46,11 @@ public abstract class Character {
                 offY = 1;
                 break;
         }
-
         int nextX = x + offX;
         int nextY = y + offY;
-        if (nextX == grid.sizeX() || nextX < 0 || nextY == grid.sizeY() || nextY < 0)
+        if (nextX < 0 || nextX >= grid.sizeX() || nextY < 0 || nextY >= grid.sizeY())
             return false;
-
         return !TileType.fromId(grid.get(nextX, nextY)).isSolid;
-    }
-
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 
     public Character maxHp(float maxHp) {
@@ -89,8 +81,8 @@ public abstract class Character {
         hp = Math.min(hp + heal, maxHp);
     }
 
-    public void lostHp(float damage) {
-        hp = Math.max(hp - damage, 0);
+    public void lostHp(float dmg) {
+        hp = Math.max(hp - dmg, 0);
     }
 
     public float getHp() {
@@ -105,12 +97,12 @@ public abstract class Character {
         return speed;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public float getPower() {
         return power;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getX() {

@@ -2,13 +2,11 @@ package ui.components;
 
 import types.Color;
 import types.Vec2;
-import ui.TextProvider;
+import ui.*;
 
 public class Label extends UIComponent {
-  protected TextProvider textProvider = () -> {
-    return "";
-  };
-  protected int fontColor = Color.rgb(0, 0, 0);
+  protected TextProvider textProvider = () -> "";
+  protected ColorProvider fontColorProvider = () -> Color.rgb(0, 0, 0);
 
   protected Label() {
   }
@@ -23,19 +21,22 @@ public class Label extends UIComponent {
   }
 
   public Label text(String s) {
-    this.textProvider = () -> {
-      return s;
-    };
+    this.textProvider = () -> s;
     return this;
   }
 
   public Label fontColor(int color) {
-    this.fontColor = color;
+    this.fontColorProvider = () -> color;
+    return this;
+  }
+
+  public Label fontColor(ColorProvider prov) {
+    this.fontColorProvider = prov;
     return this;
   }
 
   protected void drawText(float x, float y) {
-    renderer.setColor(fontColor);
+    renderer.setColor(fontColorProvider.get());
     renderer.drawText(textProvider.get(), x, y);
   }
 
@@ -43,7 +44,6 @@ public class Label extends UIComponent {
   public void draw(Vec2 parentPos, Vec2 parentSize) {
     float absX = relPos.x * parentSize.x + parentPos.x;
     float absY = relPos.y * parentSize.y + parentPos.y;
-
     drawText(absX, absY);
   }
 }

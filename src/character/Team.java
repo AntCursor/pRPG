@@ -14,11 +14,10 @@ public class Team {
 
   private Character[] members = new Character[SIZE];
   private int count = 0;
-  private int level = 1;
+  private int level;
   private int xp = 0;
   private final boolean isHeroTeam;
 
-  // Exploration state
   private int x, y;
   private boolean defeated = false;
   private long lastMoveTime = 0;
@@ -27,12 +26,20 @@ public class Team {
 
   public Team(boolean isHeroTeam) {
     this.isHeroTeam = isHeroTeam;
+    this.level = 1;
   }
 
   public Team(boolean isHeroTeam, int x, int y) {
+    this(isHeroTeam);
+    this.x = x;
+    this.y = y;
+  }
+
+  public Team(boolean isHeroTeam, int x, int y, int level) {
     this.isHeroTeam = isHeroTeam;
     this.x = x;
     this.y = y;
+    this.level = level;
   }
 
   public Team add(Character c) {
@@ -84,16 +91,22 @@ public class Team {
     }
   }
 
-  // Exploration: autonomous movement
+  public void resetForNewGame() {
+    level = 1;
+    xp = 0;
+    for (int i = 0; i < count; i++) {
+      applyLevelStats(members[i]);
+    }
+  }
+
   public void update(GameContext game, Grid grid) {
     if (defeated)
       return;
     if ((game.millis() - lastMoveTime) < currentCooldown)
       return;
 
-    int idx = (int) (game.random() * 4);
     int offX = 0, offY = 0;
-    switch (idx) {
+    switch ((int) (game.random() * 4)) {
       case 0:
         offY = -1;
         break;
@@ -110,7 +123,6 @@ public class Team {
 
     int nextX = x + offX;
     int nextY = y + offY;
-
     if (nextX >= 0 && nextX < grid.sizeX() &&
         nextY >= 0 && nextY < grid.sizeY() &&
         !TileType.fromId(grid.get(nextX, nextY)).isSolid) {
@@ -122,7 +134,6 @@ public class Team {
     lastMoveTime = game.millis();
   }
 
-  // Exploration: draw on grid
   public void draw(GridRenderer gridRenderer, AssetManager assets) {
     if (defeated)
       return;
@@ -130,7 +141,6 @@ public class Team {
     gridRenderer.renderOn(img, x, y);
   }
 
-  // Exploration: collision with hero
   public boolean isCollidingWith(Hero hero) {
     return !defeated && hero.getX() == x && hero.getY() == y;
   }
@@ -147,10 +157,9 @@ public class Team {
   }
 
   private void applyLevelStats(Character c) {
-    float newMaxHp = level * 50f;
-    float newPower = level * 10f;
-    c.maxHp(newMaxHp);
-    c.power(newPower);
-    c.setHp(newMaxHp);
+    c.maxHp(level * 50f);
+    c.power(level * 10f);
+    c.speed(level * 2f);
+    c.setHp(level * 50f);
   }
 }

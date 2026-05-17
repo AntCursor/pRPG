@@ -1,5 +1,5 @@
 package scene;
 
 public enum GameState {
-    MAIN_MENU, EXPLORATION, BATTLE, GAMEOVER;
+    MAIN_MENU, EXPLORATION, BATTLE, GAMEOVER, WIN;
 }

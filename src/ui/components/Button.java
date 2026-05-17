@@ -2,6 +2,7 @@ package ui.components;
 
 import types.Color;
 import types.Vec2;
+import ui.*;
 
 public class Button extends Label {
   private Runnable action = () -> {
@@ -19,18 +20,26 @@ public class Button extends Label {
   }
 
   @Override
+  public Button text(TextProvider prov) {
+    super.text(prov);
+    return this;
+  }
+
+  @Override
   public Button fontColor(int color) {
-    this.fontColor = color;
+    super.fontColor(color);
+    return this;
+  }
+
+  @Override
+  public Button fontColor(ColorProvider prov) {
+    super.fontColor(prov);
     return this;
   }
 
   public Button action(Runnable action) {
     this.action = action;
     return this;
-  }
-
-  public Runnable getAction() {
-    return action;
   }
 
   public Button color(int color) {
@@ -50,8 +59,7 @@ public class Button extends Label {
       renderer.drawRect(rectX, rectY, rectW, rectH);
     }
 
-    renderer.setColor(fontColor);
-    renderer.drawText(textProvider.get(), rectX + rectW * 0.5f, rectY + rectH * 0.5f);
+    drawText(rectX + rectW * 0.5f, rectY + rectH * 0.5f);
   }
 
   @Override
